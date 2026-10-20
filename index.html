@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 21st Birthday, Jaan! ✨❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #fffafb;
+            --primary-pink: #f8bbd0;
+            --soft-rose: #f48fb1;
+            --accent-purple: #ce93d8;
+            --text-dark: #4a4a4a;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 10px 30px rgba(244, 143, 177, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 50%, #f3e5f5 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px 10px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background hearts/particles */
+        .heart-bg {
+            position: fixed;
+            top: -10%;
+            font-size: 1.2rem;
+            color: rgba(244, 143, 177, 0.3);
+            user-select: none;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(115vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px 20px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ad1457;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #8e24aa;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--primary-pink);
+            padding: 10px 22px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #ad1457;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, #f48fb1, #ce93d8);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(244, 143, 177, 0.4);
+        }
+
+        /* Tab Contents */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .card h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
+
+        /* Interactive Cake Section */
+        .cake-container {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .cake-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 380px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .cake-img:hover {
+            transform: scale(1.02);
+        }
+
+        .cake-btn {
+            background: linear-gradient(135deg, #ff4081, #ab47bc);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 6px 20px rgba(255, 64, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cake-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 64, 129, 0.5);
+        }
+
+        /* Audio & Video Players */
+        audio, video {
+            width: 100%;
+            max-width: 650px;
+            border-radius: 15px;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        video {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background-color: #000;
+            max-height: 500px;
+        }
+
+        .wishes-box {
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #555;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #f48fb1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .wishes-box p {
+            margin-bottom: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #ad1457;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.6rem; }
+            .card { padding: 20px 15px; }
+            .tab-btn { padding: 8px 16px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Hearts -->
+    <div id="heart-container"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Happy 21st Birthday, Jaan! 🎂✨</h1>
+            <p class="subtitle">21st October • A Very Special Celebration For You ❤️</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('celebrate')">🎂 Celebration</button>
+            <button class="tab-btn" onclick="switchTab('voice')">🎙️ Voice Note</button>
+            <button class="tab-btn" onclick="switchTab('video')">🎥 Memory Video</button>
+            <button class="tab-btn" onclick="switchTab('wishes')">🌺 Blessings & Wishes</button>
+        </div>
+
+        <!-- TAB 1: CELEBRATION / CAKE CUTTING -->
+        <div id="celebrate" class="tab-content active">
+            <div class="card">
+                <h2>Cut Your Virtual Birthday Cake! 🎈</h2>
+                <p style="color: #777; margin-bottom: 15px;">Click on the picture or the button below to celebrate!</p>
+                <div class="cake-container" onclick="triggerConfetti()">
+                    <img src="birthday pic.jpg" alt="Happy Birthday Jaan" class="hero-img cake-img">
+                </div>
+                <br>
+                <button class="cake-btn" onclick="triggerConfetti()">🎉 Celebrate & Cut Cake! 🎉</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: VOICE NOTE -->
+        <div id="voice" class="tab-content">
+            <div class="card">
+                <h2>🎙️ A Special Voice Message For You</h2>
+                <p style="color: #666; margin-bottom: 15px;">Press play to listen to a heartfelt message:</p>
+                <audio controls>
+                    <source src="birthday audio.m4a" type="audio/mp4">
+                    <source src="birthday audio.m4a" type="audio/x-m4a">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <!-- TAB 3: VIDEO MEMORIES -->
+        <div id="video" class="tab-content">
+            <div class="card">
+                <h2>🎥 Special Moments & Chat Slideshow</h2>
+                <p style="color: #666; margin-bottom: 15px;">Enjoy these precious chat memories:</p>
+                <video controls poster="birthday pic.jpg">
+                    <source src="birthday video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <!-- TAB 4: BLESSINGS & WISHES -->
+        <div id="wishes" class="tab-content">
+            <div class="card">
+                <h2>🌺 Warmest Birthday Wishes & Blessings</h2>
+                <div class="wishes-box">
+                    <p><strong>Happy 21st Birthday, Jaan!</strong> 🎉🎂</p>
+                    <p>Happy Vijayadashami as well! May Durga Maa, Shiv Ji, Krishna Ji, and Parvati Ji shower you with endless happiness, prosperity, and a bright, successful future.</p>
+                    <p>May you achieve all your dreams, excel in your studies, and make Uncle, Aunty, and Didi feel immensely proud of you[cite: 10]. Wishing you a stable, healthy, and blissful life ahead filled with great opportunities and packages[cite: 10]!</p>
+                    <p>Please remember to take your medicines on time and take good care of your health[cite: 10]. Sending you all my love! ❤️</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Made with ❤️ for your 21st Birthday
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            if(tabId === 'celebrate') {
+                triggerConfetti();
+            }
+        }
+
+        // Confetti effect
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = ['🌸', '✨', '💖', '🎂', '💕'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+            document.getElementById('heart-container').appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+
+        setInterval(createHeart, 600);
+        
+        // Trigger initial confetti when page loads
+        window.onload = function() {
+            setTimeout(triggerConfetti, 500);
+        };
+    </script>
+</body>
+</html>
